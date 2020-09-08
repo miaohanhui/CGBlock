@@ -1,0 +1,79 @@
+﻿@model List<CGBlcok.MongoDAL.Model.Article>
+    <script>
+
+        function aLike(article_id) {
+            $.ajax(
+                {
+                    type: 'post',
+                    url: '@Url.Action("Like")',
+                    data: {
+                        _id: article_id
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (data) {
+                        alert(data);
+                    }
+                });
+        }
+    </script>
+    <div class="first-content">
+        <div class="pic home-picture" style="background: url(../../Content/assets/images/homebg.jpg);">
+            <div class="overlay"></div>
+            <div class="content">
+                <h3>Welcome to DOG.HOME</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="second-section">
+            <div class="filters">
+                <ul id="filters">
+                    <li class="active" data-filter="*">All</li>
+                    <li data-filter=".design">Design</li>
+                    <li data-filter=".photography">Photography</li>
+                    <li data-filter=".art">Art Work</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row masonry">
+            @foreach (var artilce in Model)
+            {
+            <div class="col-md-4 col-sm-6 col-xs-12 selector design">
+                <div class="item">
+                    <img src="@artilce.imgUrl" alt="">
+                    <div class="overlay">
+                        <div class="overlay-inner">
+                            <h3><a onclick="aLike('@artilce._id')">@artilce.title</a></h3>
+                            <h5 onclick="Like('@artilce._id')"><a>@artilce.ltitle</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+            
+
+        </div>
+        <div class="btn-load-more">
+            <button class="load-more">
+                Load More
+            </button>
+        </div>
+    </div>
+    <footer>
+        <div class="main-footer">
+            <p> Copyright © 2016 By Crafted Theme</p>
+            <p>Made with Love from Us.</p>
+            <div class="icons" style="display:none;">
+                <ul>
+                    <li><a target="_BLANK" href="http://facebook.com/"><i class="fa fa-facebook"></i> </a></li>
+                    <li><a target="_BLANK" href="http://instagram.com/"><i class="fa fa-instagram"></i> </a></li>
+                    <li><a target="_BLANK" href="http://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                    <li><a target="_BLANK" href="http://behance.net/"><i class="fa fa-behance"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
